@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-image: url(background.png);
+}
+
+.main-div{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.title{
+  width: 20vw;
+}
+
+.search{
+  margin-top: 25px;
+  position: relative;
+  cursor: text;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 0 16px;
+  height: 48px;
+  background-color: #fff;
+  border: 1px solid #d6d6e7;
+  border-radius: 0.5rem;
+  color: rgb(35, 38, 59);
+  box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
+  overflow: hidden;
+  transition: all 250ms ease-in-out;
+  width: 75vw;
+}
+.search:focus{
+  border-color: #3c4fe0;
+  box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
+}
+
+.results-area{
+    margin-top: 3rem;
+}
+
+.result{
+  background-color: #fff;
+  border: 1px solid #d6d6e7;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 3rem;
+  width: 40vw;
+  display: grid;
+  align-items: left; 
+  grid-template-columns: 1fr 10fr;
+  column-gap: 20px;
+}
+
+.result img{
+  width: 100px;
+  border-radius: 0.5rem;
+}
+
+.result .song-title{
+  background-color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0px;
+}
+
+.result .song-artist{
+  margin-bottom: 7.5px;
+  border-radius: 0.5rem;
+}
+
+.details{
+  background-color: #fff;
+  border: 1px solid #d6d6e7;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 3rem;
+  width: 75vw;
+  display: grid;
+  align-items: left; 
+  grid-template-columns: 1fr 10fr;
+  column-gap: 20px;
+}
+
+.details img{
+  width: 500px;
+  border-radius: 0.5rem;
+}
+
+.details .song-title{
+  background-color: white;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0px;
+}
+
+.details .song-artist{
+  margin-bottom: 7.5px;
+  border-radius: 0.5rem;
+  font-size:1.25rem
+}
+
+.details .listen-on{
+  font-size:1.1rem;
+}
