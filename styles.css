@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 *{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body{
-  background-image: url(background.png);
+  background-image: url(assets/background.png);
+  background-size: cover;
 }
 
 .main-div{
@@ -37,16 +39,22 @@ body{
   color: rgb(35, 38, 59);
   box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
   overflow: hidden;
-  transition: all 250ms ease-in-out;
-  width: 75vw;
+  width: 90%;
 }
 .search:focus{
   border-color: #3c4fe0;
   box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
 }
 
+.search-button{
+  width: 9.7%;
+  height: 48px;
+  margin-top: -8px;
+  padding: 0 16px;
+}
+
 .results-area{
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .result{
@@ -55,7 +63,7 @@ body{
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 3rem;
-  width: 40vw;
+  width: 75vw;
   display: grid;
   align-items: left; 
   grid-template-columns: 1fr 10fr;
@@ -63,20 +71,22 @@ body{
 }
 
 .result img{
-  width: 100px;
+  width: 140px;
   border-radius: 0.5rem;
 }
 
 .result .song-title{
   background-color: white;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   margin-bottom: 0px;
+  margin-top: 0.5rem;
 }
 
 .result .song-artist{
   margin-bottom: 7.5px;
   border-radius: 0.5rem;
+  font-size: 1.25rem;
 }
 
 .details{
@@ -92,9 +102,34 @@ body{
   column-gap: 20px;
 }
 
-.details img{
+.details .image-container{
   width: 500px;
   border-radius: 0.5rem;
+  position: relative;
+}
+
+.details .image-container img{
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.image-container .button-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #00000000;
+  color:white;
+  border: none;
+  font-size: 10rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  transition: all 250ms ease-in-out;
+}
+
+.image-container .button-play:hover{
+  color:black;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 
 .details .song-title{
@@ -107,9 +142,47 @@ body{
 .details .song-artist{
   margin-bottom: 7.5px;
   border-radius: 0.5rem;
-  font-size:1.25rem
+  font-size:1.25rem;
+  font-weight: 600;
+}
+
+.details .genres{
+  font-size:1.1rem;
+  font-weight: 500;
 }
 
 .details .listen-on{
   font-size:1.1rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.details .streaming-services{
+  display:flex;
+  gap: 0.5rem;
+}
+
+.details .streaming-logo{
+  width: 100px;
+  height: 75px;
+}
+
+.details .streaming-button{
+  border-color: #146c4300;
+  border-radius: 0.5rem;
+}
+
+.details .streaming-button:hover{
+  background-color: #ad0dd5;
+  border-color: #620779;
+}
+
+.details .lyrics{
+  overflow-y: scroll;
+  height: 200px;
+}
+
+.details .lyrics-title{
+  font-size: 1.1rem;
+  font-weight: 500;
 }
