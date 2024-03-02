@@ -1,9 +1,14 @@
 let searchElement = document.getElementsByClassName("search");
+let searchBtn = document.getElementsByClassName("search-button");
 
 searchElement[0].addEventListener("keydown", function (e) {
     if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-        search(e);
+        search();
     }
+});
+
+searchBtn[0].addEventListener("click", function (e) {
+    search();
 });
 
 async function search() {
@@ -27,7 +32,7 @@ async function search() {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'b9c6f2bdf6mshf58ffb2dba877f9p1be862jsn8bf18d21e059',
+            'X-RapidAPI-Key': 'b5e174ee88msh8da9f0e69a58cf5p1dfa71jsnb128532df449',
             'X-RapidAPI-Host': 'shazam.p.rapidapi.com'
         }
     };
@@ -91,7 +96,7 @@ async function detailsF(id, providersHub) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'b9c6f2bdf6mshf58ffb2dba877f9p1be862jsn8bf18d21e059',
+            'X-RapidAPI-Key': 'b5e174ee88msh8da9f0e69a58cf5p1dfa71jsnb128532df449',
             'X-RapidAPI-Host': 'shazam.p.rapidapi.com'
         }
     };
@@ -165,10 +170,8 @@ async function detailsF(id, providersHub) {
                 btnDeezer.type = "button";
                 btnDeezer.innerHTML = '<i class="fa-brands fa-deezer"></i>';
                 btnDeezer.addEventListener("click", function(){
-                    //I CANT GET THIS TO WORK ON WINDOWS/MAC JUST IGNORE THE ERROR!!! 
-                    //WHO USES DEEZER ANYWAYS? JUST USE SPOTIFY! 
-                    //ITS IMPLEMENTED IDK HOW TO GET IT TO WORK BECAUSE DEEZER DOCS ARE BAD AND THIS API GIVES ME A URI AND NOT A URL!!
-                    window.open(providersHub.providers[i].actions[0].uri, "_self");
+                    alert("Deezer Link might not work, deezer recently updated the API and this is really glitchy now!")
+                    window.open(providersHub.providers[i].actions[0].uri, "_blank");
                 });
                 streamingServices.append(btnDeezer);
             } 
@@ -179,7 +182,7 @@ async function detailsF(id, providersHub) {
             btnApple.type = "button";
             btnApple.innerHTML = '<i class="bi bi-apple"></i>';
             btnApple.addEventListener("click", function(){
-                window.open(providersHub.options[0].actions[1].uri, "_self");
+                window.open(providersHub.options[0].actions[1].uri, "_blank");
             });
             streamingServices.append(btnApple);
         }
@@ -187,22 +190,22 @@ async function detailsF(id, providersHub) {
         let lyricsTitle = document.createElement('p');
     
         lyricsTitle.className = "lyrics-title";
-        lyricsTitle.innerHTML = '<a href="' + getMusixMatchLink(result.resources["shazam-songs"][id].relationships.lyrics.data[0].id) + '" target=”_blank” style="text-decoration: none;">\
-                                    Lyrics\
-                                </a>';
+        lyricsTitle.innerHTML = 'Lyrics';
 
-
-        
         let lyrics = document.createElement('div');
         lyrics.className = "lyrics";
         let lyricsText = "";
 
-        for (let i = 0; i < result.resources.lyrics[result.resources["shazam-songs"][id].relationships.lyrics.data[0].id]['attributes']['text'].length; ++i) { 
-            const element = result.resources.lyrics[result.resources["shazam-songs"][id].relationships.lyrics.data[0].id]['attributes']['text'][i];
-            lyricsText = lyricsText + element + '<br>';
+        if(typeof result.resources.lyrics != "undefined"){
+            for (let i = 0; i < result.resources.lyrics[result.resources["shazam-songs"][id].relationships.lyrics.data[0].id]['attributes']['text'].length; ++i) { 
+                const element = result.resources.lyrics[result.resources["shazam-songs"][id].relationships.lyrics.data[0].id]['attributes']['text'][i];
+                lyricsText = lyricsText + element + '<br>';
+            }
+            lyricsText = lyricsText + '<br><br>' + result.resources.lyrics[result.resources["shazam-songs"][id].relationships.lyrics.data[0].id]['attributes'].footer;
+        } else {
+            const element = "No lyrics were found for this song...";
+            lyricsText = element;
         }
-
-        lyricsText = lyricsText + '<br><br>' + result.resources.lyrics[result.resources["shazam-songs"][id].relationships.lyrics.data[0].id]['attributes'].footer;
 
         lyrics.innerHTML = lyricsText;
     
@@ -227,22 +230,4 @@ function playPausePreview(audio){
     else{
         audio.play();
     }
-}
-
-async function getMusixMatchLink(id){
-    const url = 'https://api.musixmatch.com/ws/1.1/track.get?apikey=41bf102baf84ef9e2d9895ee610fa541&commontrack_id=' + id;
-    const options = {
-        method: 'GET',
-        mode: 'no-cors',
-        headers: {
-            'access-control-allow-origin': '*',
-            'Accept': 'application/json',
-        },
-    };
-
-    const response = await fetch(url, options);
-    const resultJSON = await response.text();
-    const result = JSON.parse(resultJSON);
-    console.log(result);
-    return result.message.body.track.track_share_url;
 }
