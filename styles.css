@@ -11,6 +11,7 @@
 body{
   background-image: url(assets/background.png);
   background-size: cover;
+  overflow: hidden;
 }
 
 .main-div{
@@ -112,6 +113,7 @@ body{
   width: 100%;
   position: relative;
   display: block;
+  border-radius: 0.5rem;
 }
 
 .image-container .button-play {
@@ -170,19 +172,23 @@ body{
 .details .streaming-button{
   border-color: #146c4300;
   border-radius: 0.5rem;
+  font-size: 2rem;
+  color: black;
 }
 
 .details .streaming-button:hover{
   background-color: #ad0dd5;
   border-color: #620779;
+  color: white;
 }
 
 .details .lyrics{
   overflow-y: scroll;
-  height: 200px;
+  height: 280px;
 }
 
 .details .lyrics-title{
   font-size: 1.1rem;
   font-weight: 500;
+  color: black;
 }
