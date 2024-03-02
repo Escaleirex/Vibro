@@ -184,24 +184,12 @@ async function detailsF(id, providersHub) {
             streamingServices.append(btnApple);
         }
     
-        const urlM = 'https://api.musixmatch.com/ws/1.1/track.get?apikey=41bf102baf84ef9e2d9895ee610fa541&commontrack_id=907374';
-        const optionsM = {
-            method: 'GET',
-        };
+        let lyricsTitle = document.createElement('p');
     
-        try {
-            const responseM = await fetch(urlM, optionsM);
-            const resultMJSON = await response.text();
-            const resultM = JSON.parse(resultMJSON);
-            console.log(resultM);
-            let lyricsTitle = document.createElement('p');
-            lyricsTitle.className = "lyrics-title";
-            lyricsTitle.innerHTML = '<a href="' + resultM.message + '" target=”_blank” style="text-decoration: none;">\
-                                        Lyrics\
-                                    </a>';
-        } catch (error) {
-            console.error(error);
-        }
+        lyricsTitle.className = "lyrics-title";
+        lyricsTitle.innerHTML = '<a href="' + getMusixMatchLink(result.resources["shazam-songs"][id].relationships.lyrics.data[0].id) + '" target=”_blank” style="text-decoration: none;">\
+                                    Lyrics\
+                                </a>';
 
 
         
@@ -239,4 +227,22 @@ function playPausePreview(audio){
     else{
         audio.play();
     }
+}
+
+async function getMusixMatchLink(id){
+    const url = 'https://api.musixmatch.com/ws/1.1/track.get?apikey=41bf102baf84ef9e2d9895ee610fa541&commontrack_id=' + id;
+    const options = {
+        method: 'GET',
+        mode: 'no-cors',
+        headers: {
+            'access-control-allow-origin': '*',
+            'Accept': 'application/json',
+        },
+    };
+
+    const response = await fetch(url, options);
+    const resultJSON = await response.text();
+    const result = JSON.parse(resultJSON);
+    console.log(result);
+    return result.message.body.track.track_share_url;
 }
